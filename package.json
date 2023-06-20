@@ -1,0 +1,16 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "\"user can create , update , read and delete items\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "\"Manthan Gadekar\"",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
