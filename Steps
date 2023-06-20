@@ -1,0 +1,88 @@
+# Bookstore_App
+
+step 1 :  first i have created a one folder as a bookstore
+step 2 :  open in vs code and open terminal.
+step 3 :  add dependecies required for nodejs project.
+            1. npm install express
+            2. npm install body-parser
+            3. npm install nodemon
+step 4 : create root file as a index.js
+step 5 : in index.js 
+          create a basic server and run it
+          1.const express = require('express');
+          2.const bodyParser = require('body-parser');
+          3.const app = express();
+          4.const port = 8000;
+          5.app.listen(port, () => {
+            console.log(`Server listening on port ${port}`);
+          });
+          
+step 6 : create varible which is store all item in that.
+          let items =  [
+  { id: 1, name: 'the Secret' },
+  { id: 2, name: 'The Shikshya' },
+  { id: 3, name: 'BhagawatGita' },
+]; 
+
+step 7 : 
+        1. sent data to api to see items so i used get http request:
+        // GET
+          app.get('/api/items', (req, res) => {
+          res.json(items);
+        });
+step 8 : 1. i should get item according to its id so sent request to server i used get methods
+
+        app.get('/api/items/:id', (req, res) => {
+        const itemId = parseInt(req.params.id);
+        const item = items.find((item) => item.id === itemId);
+        if (item) {
+          res.json(item);
+          } else {
+        res.status(404).json({ error: 'Item not found' });
+        }
+      });
+      
+ step 9 :   i should know item so i used post to get item
+              app.post('/api/items', (req, res) => {
+              const newItem = req.body;
+              newItem.id = items.length + 1;
+              items.push(newItem);
+            res.status(201).json(newItem);
+          });
+          
+  step 10 :  i want to update item so i used put method
+      
+      app.put('/api/items/:id', (req, res) => {
+      const itemId = parseInt(req.params.id);
+       const updatedItem = req.body;
+
+      const index = items.findIndex((item) => item.id === itemId);
+
+        if (index !== -1) {
+            items[index] = { id: itemId, ...updatedItem };
+        res.json(items[index]);
+        } else {
+      res.status(404).json({ error: 'Item not found' });
+    }
+    });
+    
+step 11 : i want to delete specific item so i used delete method.
+        
+        app.delete('/api/items/:id', (req, res) => {
+  const itemId = parseInt(req.params.id);
+  const index = items.findIndex((item) => item.id === itemId);
+
+  if (index !== -1) {
+    const deletedItem = items[index];
+    items.splice(index, 1);
+    res.json(deletedItem);
+  } else {
+    res.status(404).json({ error: 'Item not found' });
+  }
+});
+
+
+        
+        
+        
+        
